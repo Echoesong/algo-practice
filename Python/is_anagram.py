@@ -1,25 +1,27 @@
-def isAnagram(str1, str2):
-    myDict1 = {}
-    myDict2 = {}
-    for character in str1:
-        if character in myDict1:
-            myDict1[character] += 1
-        else:
-            myDict1[character] = 1
-    for letter in str2:
-        if letter in myDict2:
-            myDict2[letter] += 1
-        else:
-            myDict2[letter] = 1
-    print('Dict1: ', myDict1.keys(), myDict1.values())
-    print('Dict2: ', myDict2.keys(), myDict2.values())
-    if myDict1.keys() == myDict2.keys() and myDict1.values() == myDict2.values():
-        return True
-    else:
+def isAnagram(s, t):
+    if len(s) != len(t):
         return False
+    myDict = {}
+    for character in s:
+        if character in myDict:
+            myDict[character] += 1
+        else:
+            myDict[character] = 1
+    for letter in t:
+        if not letter in myDict:
+            return False
+        if letter in myDict:
+            myDict[letter] -= 1
+    dictValues = myDict.values()
+    for count in dictValues:
+        if count != 0:
+            return False
+    return True
     
 
 
 
 
 print(isAnagram('racecar', 'racerac'))
+print(isAnagram('racecar', 'raceca'))
+print(isAnagram('racecar', 'racecaz'))
